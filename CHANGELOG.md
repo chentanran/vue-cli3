@@ -3,7 +3,5 @@
 
 ### Features
 
-* 添加生成changelog功能 ([76d2a48](https://github.com/chentanran/vue-cli3/commit/76d2a48))
-
-
-
+* 添加生成changelog功能 ([76d2a4
+(https://github.com/chentanran/vue-cli3/commit/76d2a48))
