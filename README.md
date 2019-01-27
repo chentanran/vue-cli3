@@ -107,3 +107,51 @@ commitizen init cz-conventional-changelog --save --save-exact
 ```
 * 配好后，之后用到git commit命令时，改为使用git cz。
 
+### 生成 Change log
+
+* 全局安装
+```
+npm install -g conventional-changelog-cli
+```
+* 项目目录运行
+```
+conventional-changelog -p angular -i CHANGELOG.md -s -r 0
+```
+* 这时你会发现项目目录里面多了CHANGLOG.md文件
+
+#### 命令放在script里面
+```
+"version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
+```
+
+### 使用commitlint效验提交信息
+
+* 安装依赖
+```
+npm install --save-dev @commitlint/config-conventional @commitlint/cli
+npm install --save-dev husky
+```
+
+* 根目录新建文件commitlint.config.js
+```javascript
+module.exports = {
+ extends: ["@commitlint/config-conventional"],
+ rules: {
+   "type-enum": [
+     2,
+     "always",
+     ["feat", "fix", "docs", "style", "refactor", "test", "chore", "revert"]
+   ],
+   "subject-full-stop": [0, "never"],
+   "subject-case": [0, "never"]
+ }
+};
+```
+* 在package.json中添加husky配置
+```javascript
+"husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+  }
+}
+```
